@@ -28,25 +28,29 @@ def new_task(): #function to make new task
     return task
     
 def view_task(task):
-    print("\n")
+    print("****************************")
     print(f"Description: {task.description}\nid: {task.id}\ncreated: {task.created_at}\nmodified: {task.modified_at}")
-    print("\n")
+    print("****************************")
     if task.status == "1":
-        print("ongoing")
+        print("Ongoing...")
     else:
-        print("done")
-    print("\n")
+        print("Done")
+    print("")
 
 
-def main():
+def welcome():
     print("***********************")
     print("* Welcome To Task-Cli *")
     print("***********************")
+
+def main():
+
 
     print("Press (1) to add a task\nPress (2) to edit it\nPress (3) to delete it")
     choice = input("(1/2/3): ")
     if choice == "1":
         add_newtask()
+        main()
     elif choice == "2":
         pass
     elif choice=="3":
@@ -61,6 +65,8 @@ def add_newtask():
     
     tasks.append(new_task())
     for i in range(len(tasks)):
+        print("**************")
+        print(f"* Task ID: {tasks[i].id} *")
         view_task(tasks[i])
     
     
@@ -72,4 +78,5 @@ def add_newtask():
 
 if __name__ == "__main__":
     tasks = []
+    welcome()
     main()
