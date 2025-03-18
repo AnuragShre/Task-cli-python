@@ -58,7 +58,7 @@ def main():
 
 
 def add_newtask():
-    tasks = []
+    
     tasks.append(new_task())
     for i in range(len(tasks)):
         view_task(tasks[i])
@@ -71,4 +71,5 @@ def add_newtask():
 
 
 if __name__ == "__main__":
+    tasks = []
     main()
