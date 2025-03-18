@@ -21,11 +21,11 @@ def new_task(): #function to make new task
     d = input("Describe your task: ")
     s = input("Set Status (1 = ongoing ; 2 = Done): ")
     if s=="1" or s=="2":
-        task = Task(description = d,status=s)
+        tasks = Task(description = d,status=s)
     else:
         print("Enter a valid status choice")
         new_task()
-    return task
+    return tasks
     
 def view_task(task):
     print("****************************")
@@ -55,7 +55,8 @@ def main():
         edit_task()
         main()
     elif choice=="3":
-        pass
+        delete()
+        main()
     else:
         print("Please enter a vaild choice")
         main()
@@ -83,6 +84,8 @@ def edit_task():
                 if tasks[i].id == task_id:
                     new_desc = input("Enter new description: ")
                     tasks[i].description = new_desc
+                    tasks[i].modified_at =  str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
+    
         elif choice == "s":
             task_id = input("Enter task ID: ")
             for i in range(len(tasks)):
@@ -93,11 +96,18 @@ def edit_task():
                         tasks[i].status = "Ongoing..."
                     else:
                         tasks[i].status = "Done."
+                    tasks[i].modified_at =  str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
     else:
         print("Please enter a valid choice")
         edit_task()                
 
 
+def delete():
+    list_tasks()
+    task_id = input("Task ID of task you want to delete: ")
+    for i in range(len(tasks)):
+        if tasks[i].id == task_id:  
+            tasks.pop(i)  
 
 
 def list_tasks():
