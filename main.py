@@ -37,7 +37,6 @@ def view_task(task):
     else:
         print("Done")
         task.status = "Done."
-    print("")
     print("****************************")
 
 def welcome():
