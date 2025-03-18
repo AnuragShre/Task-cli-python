@@ -47,8 +47,8 @@ def welcome():
 def main():
 
 
-    print("\nPress (1) to add a task\nPress (2) to edit it\nPress (3) to delete it\nPress (4) to list all tasks")
-    choice = input("(1/2/3/4): ")
+    print("\nPress (1) to add a task\nPress (2) to edit it\nPress (3) to delete it\nPress (4) to list all tasks\nPress (5) to filter search")
+    choice = input("(1/2/3/4/5): ")
     if choice == "1":
         add_newtask()
         main()
@@ -60,6 +60,9 @@ def main():
         main()
     elif choice=="4":
         list_tasks()
+        main()
+    elif choice == "5":
+        fil()
         main()
     else:
         print("Please enter a vaild choice")
@@ -117,10 +120,24 @@ def delete():
 
 
 def list_tasks():
+    
+    
     for i in range(len(tasks)):
         print("**************")
         print(f"* Task ID: {tasks[i].id} *")
         view_task(tasks[i])
+    if len(tasks)==0:
+        print("Empty")
+def fil():#filter
+    a = input("1 = List of Ongoing tasks\n2 = List of Completed tasks\n")
+    print("**************")
+    for i in range(len(tasks)):
+        if a == "1" and tasks[i].status=="Ongoing...":
+            print(f"Status:({tasks[i].status}) {tasks[i].description}")  
+        elif a == "2" and tasks[i].status=="Done." :
+            print(f"Status:({tasks[i].status}) {tasks[i].description}")  
+    print("**************")    
+
     if len(tasks)==0:
         print("Empty")
 
