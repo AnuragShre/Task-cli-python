@@ -1,27 +1,26 @@
 import datetime
-
-
-
+import os.path
+import json
 
 
 class Task:
     
     number_of_task = 0
     
-    def __init__(self,description,status): #initializing
+    def __init__(self,description,status,id): #initializing
         Task.number_of_task += 1
         self.description = description
         self.id = str(Task.number_of_task)
         self.status = status
         self.created_at = str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
         self.modified_at = self.created_at
-
+        save_system()
 
 def new_task(): #function to make new task 
     d = input("Describe your task: ")
     s = input("Set Status (1 = ongoing ; 2 = Done): ")
     if s=="1" or s=="2":
-        tasks = Task(description = d,status=s)
+        tasks = Task(description = d,status=s,id= Task.number_of_task)
     else:
         print("Enter a valid status choice")
         new_task()
@@ -45,28 +44,57 @@ def welcome():
     print("***********************")
 
 def main():
-
+    
 
     print("\nPress (1) to add a task\nPress (2) to edit it\nPress (3) to delete it\nPress (4) to list all tasks\nPress (5) to filter search")
     choice = input("(1/2/3/4/5): ")
     if choice == "1":
         add_newtask()
-        main()
+        
     elif choice == "2":
         edit_task()
-        main()
+        
     elif choice=="3":
         delete()
-        main()
+        
     elif choice=="4":
         list_tasks()
-        main()
+        
     elif choice == "5":
         fil()
-        main()
+        
     else:
         print("Please enter a vaild choice")
-        main()
+    save_system()
+    main()
+    
+   
+   
+def save_system():
+    data = []
+    with open("data.json", "w") as file:
+        for i in range(len(tasks)):
+            data2 = { 
+                "des": tasks[i].description,
+                "status": tasks[i].status,
+                "id":tasks[i].id,
+                "cd":tasks[i].created_at,
+                "md":tasks[i].modified_at
+                }
+            data.append(data2)
+        json.dump(data,file)
+
+    
+        
+    
+    
+def load_system():
+    with open('data.json', 'r') as file:
+        dic = json.load(file)
+        for i in range(len(dic)):
+            task = Task(description=dic[i]["des"],status=dic[i]["status"],id=dic[i]["id"])
+            tasks.append(task)
+
 
 
 
@@ -78,7 +106,7 @@ def add_newtask():
         list_tasks()
     else:
         main()
-   
+    save_system()
 def edit_task():
     choice = input("what would you like to edit?\nDescription(d)\nstatus(s)\n: ").lower()    
     if choice == "d" or choice == "s":
@@ -107,7 +135,7 @@ def edit_task():
     else:
         print("Please enter a valid choice")
         edit_task()                
-
+    save_system()
 
 def delete():
     list_tasks()
@@ -117,7 +145,7 @@ def delete():
             tasks.pop(i)  
     if len(tasks)==0:
         print("Empty")
-
+    save_system()
 
 def list_tasks():
     
@@ -127,7 +155,7 @@ def list_tasks():
         print(f"* Task ID: {tasks[i].id} *")
         view_task(tasks[i])
     if len(tasks)==0:
-        print("Empty")
+        load_system()
 def fil():#filter
     a = input("1 = List of Ongoing tasks\n2 = List of Completed tasks\n")
     print("**************")
@@ -140,6 +168,7 @@ def fil():#filter
 
     if len(tasks)==0:
         print("Empty")
+    save_system()
 
 
 
@@ -147,5 +176,17 @@ def fil():#filter
 
 if __name__ == "__main__":
     tasks = []
+
+
+
+
+
+
+
     welcome()
+    if not os.path.exists("data.json"):
+        save_system()
+    else:
+        load_system()
+   
     main()
