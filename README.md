@@ -1,5 +1,5 @@
 # Welcome To Task-Cli
 
-![image](/home/anurag/Documents/PythonJourney/Task-cli-python/1.png)
+![image](1.png)
 
-![image](/home/anurag/Documents/PythonJourney/Task-cli-python/2.png)
+![image](2.png)
