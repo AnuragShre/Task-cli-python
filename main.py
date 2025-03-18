@@ -30,13 +30,15 @@ def new_task(): #function to make new task
 def view_task(task):
     print("****************************")
     print(f"Description: {task.description}\nid: {task.id}\ncreated: {task.created_at}\nmodified: {task.modified_at}")
-    print("****************************")
+    
     if task.status == "1":
+        task.status ="Ongoing..."
         print("Ongoing...")
     else:
         print("Done")
+        task.status = "Done."
     print("")
-
+    print("****************************")
 
 def welcome():
     print("***********************")
@@ -111,14 +113,17 @@ def delete():
     for i in range(len(tasks)):
         if tasks[i].id == task_id:  
             tasks.pop(i)  
+    if len(tasks)==0:
+        print("Empty")
 
 
 def list_tasks():
- for i in range(len(tasks)):
+    for i in range(len(tasks)):
         print("**************")
         print(f"* Task ID: {tasks[i].id} *")
         view_task(tasks[i])
-    
+    if len(tasks)==0:
+        print("Empty")
 
 
 
