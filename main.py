@@ -2,7 +2,7 @@ import datetime
 
 
 
-tasks = []
+
 
 class Task:
     
@@ -58,7 +58,7 @@ def main():
 
 
 def add_newtask():
-    
+    tasks = []
     tasks.append(new_task())
     for i in range(len(tasks)):
         view_task(tasks[i])
