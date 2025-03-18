@@ -46,8 +46,8 @@ def welcome():
 def main():
 
 
-    print("\nPress (1) to add a task\nPress (2) to edit it\nPress (3) to delete it\n")
-    choice = input("(1/2/3): ")
+    print("\nPress (1) to add a task\nPress (2) to edit it\nPress (3) to delete it\nPress (4) to list all tasks")
+    choice = input("(1/2/3/4): ")
     if choice == "1":
         add_newtask()
         main()
@@ -56,6 +56,9 @@ def main():
         main()
     elif choice=="3":
         delete()
+        main()
+    elif choice=="4":
+        list_tasks()
         main()
     else:
         print("Please enter a vaild choice")
