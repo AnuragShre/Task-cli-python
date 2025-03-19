@@ -29,7 +29,7 @@ def new_task(): #function to make new task
     return tasks
     
 def view_task(task):
-    print("****************************")
+    print("=============================")
     print(f"Description: {task.description}\nid: {task.id}\ncreated: {task.created_at}\nmodified: {task.modified_at}")
     
     if task.status == "1":
@@ -38,12 +38,12 @@ def view_task(task):
     else:
         print("Done")
         task.status = "Done."
-    print("****************************")
+    print("=============================")
 
 def welcome():
-    print("***********************")
-    print("* Welcome To Task-Cli *")
-    print("***********************")
+    print("========================")
+    print("| Welcome To Task-Cli  |")
+    print("========================")
 
 def main():
     
@@ -155,8 +155,8 @@ def list_tasks():
     
     
     for i in range(len(tasks)):
-        print("**************")
-        print(f"* Task ID: {tasks[i].id} *")
+        print("==============")
+        print(f"| Task ID: {tasks[i].id} |")
         view_task(tasks[i])
     if len(tasks)==0:
         load_system()
