@@ -164,13 +164,13 @@ def list_tasks():
 
 def fil():#filter
     a = input("1 = List of Ongoing tasks\n2 = List of Completed tasks\n")
-    print("**************")
+    print("================")
     for i in range(len(tasks)):
         if a == "1" and tasks[i].status=="Ongoing...":
             print(f"Status:({tasks[i].status}) {tasks[i].description}")  
         elif a == "2" and tasks[i].status=="Done." :
             print(f"Status:({tasks[i].status}) {tasks[i].description}")  
-    print("**************")    
+    print("================")    
 
     if len(tasks)==0:
         print("Empty")
