@@ -7,21 +7,22 @@ class Task:
 
     number_of_task = 0
     
-    def __init__(self,description,status,id,**kwargs): #initializing
+    def __init__(self,description,status,id,created_at,modified_at): #initializing
         Task.number_of_task += 1
         self.description = description
         self.id = str(Task.number_of_task)
         self.status = status
-        self.created_at = str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
-        self.modified_at = self.created_at
-
-        
-
+        if os.path.exists("data.json"):
+            self.created_at= created_at
+            self.modified_at= modified_at
+            
 def new_task(): #function to make new task 
     d = input("Describe your task: ")
     s = input("Set Status (1 = ongoing ; 2 = Done): ")
+    ct = str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
+    mt = ct
     if s=="1" or s=="2":
-        tasks = Task(description = d,status=s,id= Task.number_of_task)
+        tasks = Task(description = d,status=s,id= Task.number_of_task,created_at=ct,modified_at=mt)
     else:
         print("Enter a valid status choice")
         new_task()
@@ -159,6 +160,8 @@ def list_tasks():
         view_task(tasks[i])
     if len(tasks)==0:
         load_system()
+
+
 def fil():#filter
     a = input("1 = List of Ongoing tasks\n2 = List of Completed tasks\n")
     print("**************")
