@@ -4,17 +4,18 @@ import json
 
 
 class Task:
-    
+
     number_of_task = 0
     
-    def __init__(self,description,status,id): #initializing
+    def __init__(self,description,status,id,**kwargs): #initializing
         Task.number_of_task += 1
         self.description = description
         self.id = str(Task.number_of_task)
         self.status = status
         self.created_at = str(datetime.datetime.now().strftime("%d/%m/%Y %H:%M %Y"))
         self.modified_at = self.created_at
-        save_system()
+
+        
 
 def new_task(): #function to make new task 
     d = input("Describe your task: ")
@@ -66,6 +67,7 @@ def main():
     else:
         print("Please enter a vaild choice")
     save_system()
+    
     main()
     
    
@@ -92,7 +94,7 @@ def load_system():
     with open('data.json', 'r') as file:
         dic = json.load(file)
         for i in range(len(dic)):
-            task = Task(description=dic[i]["des"],status=dic[i]["status"],id=dic[i]["id"])
+            task = Task(description=dic[i]["des"],status=dic[i]["status"],id=dic[i]["id"],created_at=dic[i]["cd"],modified_at=dic[i]["md"])
             tasks.append(task)
 
 
@@ -106,7 +108,7 @@ def add_newtask():
         list_tasks()
     else:
         main()
-    save_system()
+    
 def edit_task():
     choice = input("what would you like to edit?\nDescription(d)\nstatus(s)\n: ").lower()    
     if choice == "d" or choice == "s":
@@ -135,7 +137,7 @@ def edit_task():
     else:
         print("Please enter a valid choice")
         edit_task()                
-    save_system()
+    
 
 def delete():
     list_tasks()
@@ -145,7 +147,8 @@ def delete():
             tasks.pop(i)  
     if len(tasks)==0:
         print("Empty")
-    save_system()
+    
+    
 
 def list_tasks():
     
@@ -168,7 +171,7 @@ def fil():#filter
 
     if len(tasks)==0:
         print("Empty")
-    save_system()
+    
 
 
 
